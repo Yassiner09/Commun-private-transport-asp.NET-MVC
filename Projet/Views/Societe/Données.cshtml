@@ -1,0 +1,45 @@
+﻿@model Projet.Models.Societe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_SocieteLayout.cshtml";
+}
+
+<div class="text-center m-3">
+    <h2>Infos personnelles</h2>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Identifiant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Identifiant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MotDePasse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MotDePasse)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifier", "ModifierDonnées",null, new { @class = "btn btn-primary" })
+</p>
+
+

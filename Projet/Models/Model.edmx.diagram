@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="33cd9b5a68d045319810d388571c1988" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="ProjetModel.Abonnement" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetModel.Autocar" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetModel.Client" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetModel.Demande" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetModel.Societe" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjetModel.Ville" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="ProjetModel.FK__Abonnemen__IDAut__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.FK__Abonnemen__IDSoc__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.FK__Abonnemen__IDVil__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.FK__Abonnemen__IDVil__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.FK__Demande__IDSocie__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.FK__Demande__IDVille__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.FK__Demande__IDVille__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.AbonnementClient" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjetModel.DemandeClient" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

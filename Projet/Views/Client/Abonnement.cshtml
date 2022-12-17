@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Projet.Models.Abonnement>
+@{
+    ViewBag.Title = "Abonnement";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div class="text-center m-5">
+    <h2>Abonnez-vous !</h2>
+</div>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="~/Images/@item.AutoImage" alt="Véhicule">
+                <div class="card-body">
+                    <div class="text-center">
+                        <br />
+                        <h3>@Html.DisplayFor(modelItem => item.Societe.Nom)</h3>
+                    </div>
+                    <p class="card-text text-center">
+                        <b>Du</b> @Html.DisplayFor(modelItem => item.DateDebut) <b> au </b> @Html.DisplayFor(modelItem => item.DateFin)<br />
+                        <b>De</b> @Html.DisplayFor(modelItem => item.HeureDep) <b> à </b> @Html.DisplayFor(modelItem => item.HeureDarr)<br />
+                        <b>@Html.DisplayFor(modelItem => item.Ville.Libelle)</b> Vers <b> @Html.DisplayFor(modelItem => item.Ville1.Libelle)</b><br />
+                        <b>Autocar de marque : </b>@Html.DisplayFor(modelItem => item.Autocar.Marque)<br />
+                        <b>Climatisation : </b>@Html.DisplayFor(modelItem => item.Climatisation)<br />
+                        @if (item.nbrAtteint < item.NbrVoulu)
+                        {
+                            
+                                @Html.ActionLink("S'abonner", "SAbonner", new { id = item.IDAbonnement }, new { @class = "btn btn-outline-primary my-2" })
+
+                        }
+                        else
+                        {
+                            <div class="text-center my-2">
+                                <p>Cet offre est fermée!</p>
+                            </div>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+    
+

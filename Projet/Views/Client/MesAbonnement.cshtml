@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Projet.Models.Abonnement>
+
+@{
+    ViewBag.Title = "OffresCréés";
+    Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+
+<div class="text-center m-3">
+    <h2>Mes Abonnements</h2>
+</div>
+
+
+<p>
+    @Html.ActionLink("Abonnez-vous à des offres", "Abonnement", null, new { @class = "btn btn-outline-primary" })
+</p>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="~/Images/@item.AutoImage" alt="Véhicule">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h5><b>Du</b> @Html.DisplayFor(modelItem => item.DateDebut) <b> au </b> @Html.DisplayFor(modelItem => item.DateFin)</h5>
+                    </div>
+                    <p class="card-text text-center">
+                        <br />
+                        <b>@Html.DisplayFor(modelItem => item.Ville.Libelle)</b> Vers <b> @Html.DisplayFor(modelItem => item.Ville1.Libelle)</b><br />
+                        <b>Autocar de marque : </b>@Html.DisplayFor(modelItem => item.Autocar.Marque)<br />
+                        <b>Climatisation : </b>@Html.DisplayFor(modelItem => item.Climatisation)<br />
+                        <b>Nombre voulu : </b>@Html.DisplayFor(modelItem => item.NbrVoulu)<br />
+                        <b>Nombre atteint : </b>@Html.DisplayFor(modelItem => item.nbrAtteint)<br />
+                        @Html.ActionLink("Désabonner", "Désabonner", new { id = item.IDAbonnement }, new { @class = "btn btn-outline-danger my-2" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

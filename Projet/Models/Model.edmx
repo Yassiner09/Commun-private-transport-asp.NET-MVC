@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjetModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="IDAbonnement" />
+          </Key>
+          <Property Name="IDAbonnement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDebut" Type="date" Nullable="false" />
+          <Property Name="DateFin" Type="date" Nullable="false" />
+          <Property Name="HeureDep" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HeureDarr" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IDVilleDep" Type="int" Nullable="false" />
+          <Property Name="IDVilleDarr" Type="int" Nullable="false" />
+          <Property Name="NbrVoulu" Type="int" Nullable="false" />
+          <Property Name="nbrAtteint" Type="int" />
+          <Property Name="Climatisation" Type="bit" Nullable="false" />
+          <Property Name="IDAutocar" Type="int" Nullable="false" />
+          <Property Name="IDSociete" Type="int" Nullable="false" />
+          <Property Name="AutoImage" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AbonnementClient">
+          <Key>
+            <PropertyRef Name="IDAbonnement" />
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDAbonnement" Type="int" Nullable="false" />
+          <Property Name="IDClient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Autocar">
+          <Key>
+            <PropertyRef Name="IDAutocar" />
+          </Key>
+          <Property Name="IDAutocar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marque" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="500" />
+          <Property Name="Tel" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="IDDemande" />
+          </Key>
+          <Property Name="IDDemande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateDebut" Type="date" Nullable="false" />
+          <Property Name="DateFin" Type="date" Nullable="false" />
+          <Property Name="HeureDep" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HeureDarr" Type="time" Precision="7" Nullable="false" />
+          <Property Name="IDVilleDep" Type="int" Nullable="false" />
+          <Property Name="IDVilleDarr" Type="int" Nullable="false" />
+          <Property Name="IDSociete" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DemandeClient">
+          <Key>
+            <PropertyRef Name="IDDemande" />
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDDemande" Type="int" Nullable="false" />
+          <Property Name="IDClient" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Societe">
+          <Key>
+            <PropertyRef Name="IDSociete" />
+          </Key>
+          <Property Name="IDSociete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Identifiant" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Ville">
+          <Key>
+            <PropertyRef Name="IDVille" />
+          </Key>
+          <Property Name="IDVille" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Abonnemen__IDAbo__31EC6D26">
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="1" />
+          <End Role="AbonnementClient" Type="Self.AbonnementClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Abonnement">
+              <PropertyRef Name="IDAbonnement" />
+            </Principal>
+            <Dependent Role="AbonnementClient">
+              <PropertyRef Name="IDAbonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDAut__2C3393D0">
+          <End Role="Autocar" Type="Self.Autocar" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autocar">
+              <PropertyRef Name="IDAutocar" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDAutocar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDCli__32E0915F">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="AbonnementClient" Type="Self.AbonnementClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="AbonnementClient">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDSoc__2D27B809">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="IDSociete" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDSociete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDVil__2A4B4B5E">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDVilleDep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDVil__2B3F6F97">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDVilleDarr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__IDSocie__37A5467C">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="IDSociete" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="IDSociete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__IDVille__35BCFE0A">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="IDVilleDep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__IDVille__36B12243">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="IDVilleDarr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DemandeCl__IDCli__3B75D760">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="DemandeClient" Type="Self.DemandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="DemandeClient">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DemandeCl__IDDem__3A81B327">
+          <End Role="Demande" Type="Self.Demande" Multiplicity="1" />
+          <End Role="DemandeClient" Type="Self.DemandeClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Demande">
+              <PropertyRef Name="IDDemande" />
+            </Principal>
+            <Dependent Role="DemandeClient">
+              <PropertyRef Name="IDDemande" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjetModelStoreContainer">
+          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AbonnementClient" EntityType="Self.AbonnementClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Autocar" EntityType="Self.Autocar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demande" EntityType="Self.Demande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DemandeClient" EntityType="Self.DemandeClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Societe" EntityType="Self.Societe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ville" EntityType="Self.Ville" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Abonnemen__IDAbo__31EC6D26" Association="Self.FK__Abonnemen__IDAbo__31EC6D26">
+            <End Role="Abonnement" EntitySet="Abonnement" />
+            <End Role="AbonnementClient" EntitySet="AbonnementClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDAut__2C3393D0" Association="Self.FK__Abonnemen__IDAut__2C3393D0">
+            <End Role="Autocar" EntitySet="Autocar" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDCli__32E0915F" Association="Self.FK__Abonnemen__IDCli__32E0915F">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="AbonnementClient" EntitySet="AbonnementClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDSoc__2D27B809" Association="Self.FK__Abonnemen__IDSoc__2D27B809">
+            <End Role="Societe" EntitySet="Societe" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDVil__2A4B4B5E" Association="Self.FK__Abonnemen__IDVil__2A4B4B5E">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDVil__2B3F6F97" Association="Self.FK__Abonnemen__IDVil__2B3F6F97">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__IDSocie__37A5467C" Association="Self.FK__Demande__IDSocie__37A5467C">
+            <End Role="Societe" EntitySet="Societe" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__IDVille__35BCFE0A" Association="Self.FK__Demande__IDVille__35BCFE0A">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__IDVille__36B12243" Association="Self.FK__Demande__IDVille__36B12243">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DemandeCl__IDCli__3B75D760" Association="Self.FK__DemandeCl__IDCli__3B75D760">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="DemandeClient" EntitySet="DemandeClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DemandeCl__IDDem__3A81B327" Association="Self.FK__DemandeCl__IDDem__3A81B327">
+            <End Role="Demande" EntitySet="Demande" />
+            <End Role="DemandeClient" EntitySet="DemandeClient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Abonnement">
+          <Key>
+            <PropertyRef Name="IDAbonnement" />
+          </Key>
+          <Property Name="IDAbonnement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HeureDep" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HeureDarr" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IDVilleDep" Type="Int32" Nullable="false" />
+          <Property Name="IDVilleDarr" Type="Int32" Nullable="false" />
+          <Property Name="NbrVoulu" Type="Int32" Nullable="false" />
+          <Property Name="nbrAtteint" Type="Int32" />
+          <Property Name="Climatisation" Type="Boolean" Nullable="false" />
+          <Property Name="IDAutocar" Type="Int32" Nullable="false" />
+          <Property Name="IDSociete" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Autocar" Relationship="Self.FK__Abonnemen__IDAut__2C3393D0" FromRole="Abonnement" ToRole="Autocar" />
+          <NavigationProperty Name="Societe" Relationship="Self.FK__Abonnemen__IDSoc__2D27B809" FromRole="Abonnement" ToRole="Societe" />
+          <NavigationProperty Name="Ville" Relationship="Self.FK__Abonnemen__IDVil__2A4B4B5E" FromRole="Abonnement" ToRole="Ville" />
+          <NavigationProperty Name="Ville1" Relationship="Self.FK__Abonnemen__IDVil__2B3F6F97" FromRole="Abonnement" ToRole="Ville" />
+          <NavigationProperty Name="Client" Relationship="Self.AbonnementClient" FromRole="Abonnement" ToRole="Client" />
+          <Property Name="AutoImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Autocar">
+          <Key>
+            <PropertyRef Name="IDAutocar" />
+          </Key>
+          <Property Name="IDAutocar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marque" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.FK__Abonnemen__IDAut__2C3393D0" FromRole="Autocar" ToRole="Abonnement" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IDClient" />
+          </Key>
+          <Property Name="IDClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.AbonnementClient" FromRole="Client" ToRole="Abonnement" />
+          <NavigationProperty Name="Demande" Relationship="Self.DemandeClient" FromRole="Client" ToRole="Demande" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="IDDemande" />
+          </Key>
+          <Property Name="IDDemande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HeureDep" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HeureDarr" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IDVilleDep" Type="Int32" Nullable="false" />
+          <Property Name="IDVilleDarr" Type="Int32" Nullable="false" />
+          <Property Name="IDSociete" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Societe" Relationship="Self.FK__Demande__IDSocie__37A5467C" FromRole="Demande" ToRole="Societe" />
+          <NavigationProperty Name="Ville" Relationship="Self.FK__Demande__IDVille__35BCFE0A" FromRole="Demande" ToRole="Ville" />
+          <NavigationProperty Name="Ville1" Relationship="Self.FK__Demande__IDVille__36B12243" FromRole="Demande" ToRole="Ville" />
+          <NavigationProperty Name="Client" Relationship="Self.DemandeClient" FromRole="Demande" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Societe">
+          <Key>
+            <PropertyRef Name="IDSociete" />
+          </Key>
+          <Property Name="IDSociete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Identifiant" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.FK__Abonnemen__IDSoc__2D27B809" FromRole="Societe" ToRole="Abonnement" />
+          <NavigationProperty Name="Demande" Relationship="Self.FK__Demande__IDSocie__37A5467C" FromRole="Societe" ToRole="Demande" />
+        </EntityType>
+        <EntityType Name="Ville">
+          <Key>
+            <PropertyRef Name="IDVille" />
+          </Key>
+          <Property Name="IDVille" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Abonnement" Relationship="Self.FK__Abonnemen__IDVil__2A4B4B5E" FromRole="Ville" ToRole="Abonnement" />
+          <NavigationProperty Name="Abonnement1" Relationship="Self.FK__Abonnemen__IDVil__2B3F6F97" FromRole="Ville" ToRole="Abonnement" />
+          <NavigationProperty Name="Demande" Relationship="Self.FK__Demande__IDVille__35BCFE0A" FromRole="Ville" ToRole="Demande" />
+          <NavigationProperty Name="Demande1" Relationship="Self.FK__Demande__IDVille__36B12243" FromRole="Ville" ToRole="Demande" />
+        </EntityType>
+        <Association Name="FK__Abonnemen__IDAut__2C3393D0">
+          <End Role="Autocar" Type="Self.Autocar" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autocar">
+              <PropertyRef Name="IDAutocar" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDAutocar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDSoc__2D27B809">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="IDSociete" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDSociete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDVil__2A4B4B5E">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDVilleDep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Abonnemen__IDVil__2B3F6F97">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Abonnement">
+              <PropertyRef Name="IDVilleDarr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__IDSocie__37A5467C">
+          <End Role="Societe" Type="Self.Societe" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Societe">
+              <PropertyRef Name="IDSociete" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="IDSociete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__IDVille__35BCFE0A">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="IDVilleDep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Demande__IDVille__36B12243">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="1" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="IDVille" />
+            </Principal>
+            <Dependent Role="Demande">
+              <PropertyRef Name="IDVilleDarr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AbonnementClient">
+          <End Role="Abonnement" Type="Self.Abonnement" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+        </Association>
+        <Association Name="DemandeClient">
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <End Role="Demande" Type="Self.Demande" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ApplicationDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abonnement" EntityType="Self.Abonnement" />
+          <EntitySet Name="Autocar" EntityType="Self.Autocar" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Demande" EntityType="Self.Demande" />
+          <EntitySet Name="Societe" EntityType="Self.Societe" />
+          <EntitySet Name="Ville" EntityType="Self.Ville" />
+          <AssociationSet Name="FK__Abonnemen__IDAut__2C3393D0" Association="Self.FK__Abonnemen__IDAut__2C3393D0">
+            <End Role="Autocar" EntitySet="Autocar" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDSoc__2D27B809" Association="Self.FK__Abonnemen__IDSoc__2D27B809">
+            <End Role="Societe" EntitySet="Societe" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDVil__2A4B4B5E" Association="Self.FK__Abonnemen__IDVil__2A4B4B5E">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Abonnemen__IDVil__2B3F6F97" Association="Self.FK__Abonnemen__IDVil__2B3F6F97">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Abonnement" EntitySet="Abonnement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__IDSocie__37A5467C" Association="Self.FK__Demande__IDSocie__37A5467C">
+            <End Role="Societe" EntitySet="Societe" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__IDVille__35BCFE0A" Association="Self.FK__Demande__IDVille__35BCFE0A">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Demande__IDVille__36B12243" Association="Self.FK__Demande__IDVille__36B12243">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+          <AssociationSet Name="AbonnementClient" Association="Self.AbonnementClient">
+            <End Role="Abonnement" EntitySet="Abonnement" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="DemandeClient" Association="Self.DemandeClient">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Demande" EntitySet="Demande" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjetModelStoreContainer" CdmEntityContainer="ApplicationDbContext">
+          <EntitySetMapping Name="Abonnement">
+            <EntityTypeMapping TypeName="ProjetModel.Abonnement">
+              <MappingFragment StoreEntitySet="Abonnement">
+                <ScalarProperty Name="AutoImage" ColumnName="AutoImage" />
+                <ScalarProperty Name="IDAbonnement" ColumnName="IDAbonnement" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="HeureDep" ColumnName="HeureDep" />
+                <ScalarProperty Name="HeureDarr" ColumnName="HeureDarr" />
+                <ScalarProperty Name="IDVilleDep" ColumnName="IDVilleDep" />
+                <ScalarProperty Name="IDVilleDarr" ColumnName="IDVilleDarr" />
+                <ScalarProperty Name="NbrVoulu" ColumnName="NbrVoulu" />
+                <ScalarProperty Name="nbrAtteint" ColumnName="nbrAtteint" />
+                <ScalarProperty Name="Climatisation" ColumnName="Climatisation" />
+                <ScalarProperty Name="IDAutocar" ColumnName="IDAutocar" />
+                <ScalarProperty Name="IDSociete" ColumnName="IDSociete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Autocar">
+            <EntityTypeMapping TypeName="ProjetModel.Autocar">
+              <MappingFragment StoreEntitySet="Autocar">
+                <ScalarProperty Name="IDAutocar" ColumnName="IDAutocar" />
+                <ScalarProperty Name="Marque" ColumnName="Marque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="ProjetModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demande">
+            <EntityTypeMapping TypeName="ProjetModel.Demande">
+              <MappingFragment StoreEntitySet="Demande">
+                <ScalarProperty Name="IDDemande" ColumnName="IDDemande" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="HeureDep" ColumnName="HeureDep" />
+                <ScalarProperty Name="HeureDarr" ColumnName="HeureDarr" />
+                <ScalarProperty Name="IDVilleDep" ColumnName="IDVilleDep" />
+                <ScalarProperty Name="IDVilleDarr" ColumnName="IDVilleDarr" />
+                <ScalarProperty Name="IDSociete" ColumnName="IDSociete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Societe">
+            <EntityTypeMapping TypeName="ProjetModel.Societe">
+              <MappingFragment StoreEntitySet="Societe">
+                <ScalarProperty Name="IDSociete" ColumnName="IDSociete" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Identifiant" ColumnName="Identifiant" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ville">
+            <EntityTypeMapping TypeName="ProjetModel.Ville">
+              <MappingFragment StoreEntitySet="Ville">
+                <ScalarProperty Name="IDVille" ColumnName="IDVille" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AbonnementClient" TypeName="ProjetModel.AbonnementClient" StoreEntitySet="AbonnementClient">
+            <EndProperty Name="Abonnement">
+              <ScalarProperty Name="IDAbonnement" ColumnName="IDAbonnement" />
+            </EndProperty>
+            <EndProperty Name="Client">
+              <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="DemandeClient" TypeName="ProjetModel.DemandeClient" StoreEntitySet="DemandeClient">
+            <EndProperty Name="Client">
+              <ScalarProperty Name="IDClient" ColumnName="IDClient" />
+            </EndProperty>
+            <EndProperty Name="Demande">
+              <ScalarProperty Name="IDDemande" ColumnName="IDDemande" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

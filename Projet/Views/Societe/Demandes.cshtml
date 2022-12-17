@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Projet.Models.GérerDemande>
+
+@{
+    ViewBag.Title = "Demandes";
+    Layout = "~/Views/Shared/_SocieteLayout.cshtml";
+}
+
+<div class="text-center m-3">
+    <h2>Demandes</h2>
+</div>
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DateDebut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeureDep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeureDarr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDVilleDep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDVilleDarr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbr)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.DateDebut)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateFin)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HeureDep)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HeureDarr)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IDVilleDep)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IDVilleDarr)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.nbr)
+    </td>
+    <td>
+        @Html.ActionLink("Gérer demande", "GérerDemande", new { id = item.ID }, new { @class = "btn btn-outline-primary" })
+    </td>
+</tr>
+}
+
+</table>

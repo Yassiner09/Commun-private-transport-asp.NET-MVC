@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="text-center m-4">
+    <h1 class="mb-3">TRANSMRC</h1>
+    <p class="lead mb-5">TRANSMRC la nouvelle société de transport personnelles.</p>
+</div>
+
+<div class="row text-center mx-5 my-5">
+    <div class="col-md-4 mx-5 my-2 text-center">
+        <h2>Inscrivez-vous dès maintenant !</h2>
+        <p>
+            La meilleure société qui vous propose plusieurs offres d'abonnement de navette!
+        </p>
+        <p><a class="btn btn-primary mx-5" href="@Url.Action("Inscription", "Client")">Client</a></p>
+    </div>
+    <div class="col-md-4 mx-5 my-2 text-center">
+        <h2>Vous êtes une société de transport ?</h2>
+        <p>Inscrivez vous et créer des offres d'abonnement !</p>
+        <p><a class="btn btn-primary mx-5" href="@Url.Action("Inscription", "Societe")">Societe</a></p>
+    </div>
+</div>
